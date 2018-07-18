@@ -86,4 +86,27 @@ router.delete(
   }
 );
 
+// @route   POST api/posts/like/:id
+// @desc    Like/Unlike post
+// @access  Private
+router.post(
+  "/like/:id",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Profile.findOne({ user: req.user.id }).then(profile => {
+      Post.findById(req.params.id)
+        .then(post => {
+          const indexOfUser = post.likes.findIndex(
+            like => like.user.toString() === req.user.id
+          );
+          indexOfUser === -1
+            ? post.likes.unshift({ user: req.user.id })
+            : post.likes.splice(indexOfUser, 1);
+          post.save().then(post => res.json(post));
+        })
+        .catch(err => res.status(404).json({ postnotfound: "No post found" }));
+    });
+  }
+);
+
 module.exports = router;
