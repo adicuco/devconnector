@@ -15,11 +15,12 @@ class Navbar extends Component {
   render() {
     const { isAuthenticated, user } = this.props.auth;
     const { onLogoutClick } = this;
+    const { profile } = this.props.profile;
 
     const authLinks = (
       <ul className="navbar-nav ml-auto">
         <li className="nav-item">
-          <Link to={`/profile/${user.handle}`} className="nav-link">
+          <Link to={profile ? `/profile/${profile.handle}` : '/dashboard'} className="nav-link">
             <img
               className="rounded-circle"
               src={user.avatar}
@@ -76,9 +77,9 @@ class Navbar extends Component {
           <div className="collapse navbar-collapse" id="mobile-nav">
             <ul className="navbar-nav mr-auto">
               <li className="nav-item">
-                <a className="nav-link" href="profiles.html">
+                <Link to="/profiles" className="nav-link">
                   Developers
-                </a>
+                </Link>
               </li>
             </ul>
             {isAuthenticated ? authLinks : guestLinks}
@@ -91,11 +92,13 @@ class Navbar extends Component {
 
 Navbar.propTypes = {
   logoutUser: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired
+  auth: PropTypes.object.isRequired,
+  profile: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  auth: state.auth
+  auth: state.auth,
+  profile: state.profile
 });
 
 export default connect(
