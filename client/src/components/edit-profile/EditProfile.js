@@ -3,14 +3,14 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import { createProfile } from '../../actions/profileActions';
+import { createProfile, getCurrentProfile } from '../../actions/profileActions';
 
 import TextFieldGroup from '../common/TextFieldGroup';
 import TextAreaFieldGroup from '../common/TextFieldGroup';
 import InputGroup from '../common/InputGroup';
 import SelectListGroup from '../common/SelectListGroup';
 
-class CreateProfile extends Component {
+class EditProfile extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -62,6 +62,50 @@ class CreateProfile extends Component {
     if (prevProps.errors !== this.props.errors) {
       this.setState({ errors: this.props.errors });
     }
+
+    if (prevProps.profile.profile !== this.props.profile.profile) {
+      const profile = this.props.profile.profile;
+
+      // Bring skills array back to CSV
+      const skillsCSV = Array.isArray(profile.skills) ? profile.skills.join(', ') : profile.skills;
+
+      const {
+        company = '',
+        website = '',
+        location = '',
+        bio = '',
+        handle = '',
+        status = 0,
+        social: {
+          twitter = '',
+          facebook = '',
+          instagram = '',
+          youtube = '',
+          linkedin = '',
+          github = ''
+        } = {}
+      } = profile;
+
+      this.setState({
+        handle,
+        company,
+        website,
+        location,
+        status,
+        skills: skillsCSV,
+        bio,
+        twitter,
+        facebook,
+        linkedin,
+        youtube,
+        instagram,
+        github
+      });
+    }
+  }
+
+  componentDidMount() {
+    this.props.getCurrentProfile();
   }
 
   render() {
@@ -158,10 +202,7 @@ class CreateProfile extends Component {
         <div className="container">
           <div className="row">
             <div className="col-md-8 m-auto">
-              <h1 className="display-4 text-center">Create Your profile</h1>
-              <p className="lead text-center">
-                Let's get some information to get your profile stand out
-              </p>
+              <h1 className="display-4 text-center">Edit profile</h1>
               <small className="d-block pb-3">* = required fields</small>
               <form onSubmit={onSubmit}>
                 <TextFieldGroup
@@ -243,10 +284,11 @@ class CreateProfile extends Component {
   }
 }
 
-CreateProfile.propTypes = {
+EditProfile.propTypes = {
   profile: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,
-  createProfile: PropTypes.func.isRequired
+  createProfile: PropTypes.func.isRequired,
+  getCurrentProfile: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -256,5 +298,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { createProfile }
-)(withRouter(CreateProfile));
+  { createProfile, getCurrentProfile }
+)(withRouter(EditProfile));
