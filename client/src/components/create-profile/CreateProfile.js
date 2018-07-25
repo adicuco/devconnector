@@ -91,6 +91,7 @@ class CreateProfile extends Component {
       { label: 'Junior Developer', value: 'Junior Developer' },
       { label: 'Senior Developer', value: 'Senior Developer' },
       { label: 'Manager', value: 'Manager' },
+      { label: 'Founder or Co-Founder', value: 'Founder or Co-Founder' },
       { label: 'Student', value: 'Student' },
       { label: 'Teacher', value: 'Teacher' },
       { label: 'Intern', value: 'Intern' },
