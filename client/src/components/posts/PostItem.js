@@ -25,7 +25,7 @@ class PostItem extends Component {
   };
 
   render() {
-    const { post, auth } = this.props;
+    const { post, auth, showActions } = this.props;
     const { onDeleteClick, onLikeClick, findUserLike } = this;
 
     const thumbIconClass = classnames({
@@ -46,29 +46,33 @@ class PostItem extends Component {
           </div>
           <div className="col-md-10">
             <p className="lead">{post.text}</p>
-            <button
-              type="button"
-              className="btn btn-light mr-1"
-              onClick={() => {
-                onLikeClick(post._id);
-              }}
-            >
-              <i className={thumbIconClass} />
-              <span className="badge badge-light">{post.likes.length}</span>
-            </button>
-            <Link to={`/post/${post._id}`} className="btn btn-info mr-1">
-              Comments
-            </Link>
-            {post.user === auth.user.id ? (
-              <button
-                className="btn btn-danger mr-1"
-                type="button"
-                onClick={() => {
-                  onDeleteClick(post._id);
-                }}
-              >
-                <i className="fas fa-times" />
-              </button>
+            {showActions ? (
+              <span>
+                <button
+                  type="button"
+                  className="btn btn-light mr-1"
+                  onClick={() => {
+                    onLikeClick(post._id);
+                  }}
+                >
+                  <i className={thumbIconClass} />
+                  <span className="badge badge-light">{post.likes.length}</span>
+                </button>
+                <Link to={`/post/${post._id}`} className="btn btn-info mr-1">
+                  Comments
+                </Link>
+                {post.user === auth.user.id ? (
+                  <button
+                    className="btn btn-danger mr-1"
+                    type="button"
+                    onClick={() => {
+                      onDeleteClick(post._id);
+                    }}
+                  >
+                    <i className="fas fa-times" />
+                  </button>
+                ) : null}
+              </span>
             ) : null}
           </div>
         </div>
@@ -81,7 +85,12 @@ PostItem.propTypes = {
   post: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired,
   deletePost: PropTypes.func.isRequired,
-  likePost: PropTypes.func.isRequired
+  likePost: PropTypes.func.isRequired,
+  showActions: PropTypes.bool
+};
+
+PostItem.defaultProps = {
+  showActions: true
 };
 
 const mapStateToProps = state => ({
