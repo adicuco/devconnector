@@ -21,17 +21,15 @@ class ProfileAbout extends Component {
             {isEmpty(profile.bio) ? null : (
               <div>
                 <h3 className="text-center text-info">{fName}'s Bio</h3>
-                <p className="lead">
+                <p className="lead text-center">
                   <span>{profile.bio}</span>
                 </p>
                 <hr />
               </div>
             )}
             <h3 className="text-center text-info">Skill Set</h3>
-            <div className="row">
-              <div className="d-flex flex-wrap justify-content-center align-items-center">
-                {skills}
-              </div>
+            <div className="row justify-content-center align-items-center">
+              <div className="d-flex flex-wrap">{skills}</div>
             </div>
           </div>
         </div>
