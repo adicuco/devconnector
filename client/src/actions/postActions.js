@@ -44,8 +44,42 @@ export const deletePost = id => dispatch => {
     .catch(err => dispatch({ type: GET_ERRORS, payload: err.response.data }));
 };
 
-// Like/Unlike
+// Add Comment
+export const addComment = (postId, commentData) => dispatch => {
+  axios
+    .post(`/api/posts/comment/${postId}`, commentData)
+    .then(res => dispatch({ type: GET_POST, payload: res.data }))
+    .catch(err => dispatch({ type: GET_ERRORS, payload: err.response.data }));
+};
+
+// Delete Comment
+export const deleteComment = (postId, commentId) => dispatch => {
+  axios
+    .delete(`/api/posts/comment/${postId}/${commentId}`)
+    .then(res => dispatch({ type: GET_POST, payload: res.data }))
+    .catch(err => dispatch({ type: GET_ERRORS, payload: err.response.data }));
+};
+
+// Like/Unlike Post
 export const likePost = id => dispatch => {
+  axios
+    .post(`/api/posts/like/${id}`)
+    .then(({ data }) => {
+      dispatch({
+        type: LIKE_POST,
+        payload: data
+      });
+    })
+    .catch(({ response }) => {
+      dispatch({
+        type: GET_ERRORS,
+        payload: response.data
+      });
+    });
+};
+
+// Like/Unlike Comment
+export const likeComment = id => dispatch => {
   axios
     .post(`/api/posts/like/${id}`)
     .then(({ data }) => {
