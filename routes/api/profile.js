@@ -2,7 +2,8 @@ const express = require('express');
 const router = express.Router();
 const passport = require('passport');
 const prependHttp = require('prepend-http');
-var fetch = require("node-fetch");
+const fetch = require('node-fetch');
+const keys = require('../../config/keys');
 
 // Load Validation
 const validateProfileInput = require('../../validation/profile');
@@ -294,8 +295,8 @@ router.delete('/', passport.authenticate('jwt', { session: false }), (req, res) 
 // @access  Public
 router.get('/github/:username/:count/:sort', (req, res) => {
   const username = req.params.username;
-  const clientId = '1ffe32a2f9ff8e19652b';
-  const clientSecret = 'd459decc1aa8c9a67a43cac036d9a17fd17dd0b8';
+  const clientId = keys.githubClientId;
+  const clientSecret = keys.githubClientSecret;
   const count = req.params.count;
   const sort = req.params.sort;
   const url = `https://api.github.com/users/${username}/repos?per_page=${count}&sort=${sort}&client_id=${clientId}&client_secret=${clientSecret}`;
