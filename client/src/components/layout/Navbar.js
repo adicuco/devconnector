@@ -32,6 +32,11 @@ class Navbar extends Component {
           </Link>
         </li>
         <li className="nav-item">
+          <Link to="/feed" className="nav-link">
+            Post Feed
+          </Link>
+        </li>
+        <li className="nav-item">
           <Link to="/dashboard" className="nav-link">
             Dashboard
           </Link>
