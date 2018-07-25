@@ -18,6 +18,14 @@ class Profile extends Component {
     }
   }
 
+  componentDidUpdate() {
+    // component updated, but profile came back null and is no longer loading (reducer has finished)
+    const { profile } = this.props;
+    if (profile.profile === null && !profile.loading) {
+      this.props.history.push('/not-found');
+    }
+  }
+
   render() {
     const { profile, loading } = this.props.profile;
     const githubUsername =
