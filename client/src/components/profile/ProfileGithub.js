@@ -19,7 +19,9 @@ class ProfileGithub extends Component {
     fetch(`/api/profile/github/${username}/${count}/${sort}`)
       .then(res => res.json())
       .then(data => {
-        this.setState({ repos: data });
+        if (this.refs.myRef) {
+          this.setState({ repos: data });
+        }
       });
   }
 
@@ -45,9 +47,9 @@ class ProfileGithub extends Component {
         </div>
       </div>
     ));
-    
+
     return (
-      <div>
+      <div ref="myRef">
         <hr />
         <h3 className="mb-4">Latest Github Repos</h3>
         {repoItems}
