@@ -79,16 +79,18 @@ export const likePost = id => dispatch => {
 };
 
 // Like/Unlike Comment
-export const likeComment = id => dispatch => {
+export const likeComment = (postId, commentId) => dispatch => {
   axios
-    .post(`/api/posts/like/${id}`)
+    .post(`/api/posts/comment/like/${postId}/${commentId}`)
     .then(({ data }) => {
       dispatch({
-        type: LIKE_POST,
+        type: GET_POST,
         payload: data
       });
     })
     .catch(({ response }) => {
+      console.log(response);
+
       dispatch({
         type: GET_ERRORS,
         payload: response.data
