@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const passport = require('passport');
+const prependHttp = require("prepend-http");
 
 // Load Validation
 const validateProfileInput = require('../../validation/profile');
@@ -118,12 +119,30 @@ router.post('/', passport.authenticate('jwt', { session: false }), (req, res) =>
 
   // Social
   profileFields.social = {};
-  if (req.body.youtube) profileFields.social.youtube = req.body.youtube;
-  if (req.body.twitter) profileFields.social.twitter = req.body.twitter;
-  if (req.body.facebook) profileFields.social.facebook = req.body.facebook;
-  if (req.body.linkedin) profileFields.social.linkedin = req.body.linkedin;
-  if (req.body.instagram) profileFields.social.instagram = req.body.instagram;
-  if (req.body.github) profileFields.social.github = req.body.github;
+  if (req.body.youtube)
+    profileFields.social.youtube = prependHttp(req.body.youtube, {
+      https: true
+    });
+  if (req.body.twitter)
+    profileFields.social.twitter = prependHttp(req.body.twitter, {
+      https: true
+    });
+  if (req.body.facebook)
+    profileFields.social.facebook = prependHttp(req.body.facebook, {
+      https: true
+    });
+  if (req.body.linkedin)
+    profileFields.social.linkedin = prependHttp(req.body.linkedin, {
+      https: true
+    });
+  if (req.body.instagram)
+    profileFields.social.instagram = prependHttp(req.body.instagram, {
+      https: true
+    });
+  if (req.body.github)
+    profileFields.social.github = prependHttp(req.body.github, {
+      https: true
+    });
 
   Profile.findOne({ user: req.user.id }).then(profile => {
     if (profile) {
