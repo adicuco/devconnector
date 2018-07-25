@@ -20,6 +20,14 @@ class Profile extends Component {
 
   render() {
     const { profile, loading } = this.props.profile;
+    const githubUsername =
+      profile && profile.social.github
+        ? profile.social.github
+            .trim()
+            .split('/')
+            .pop()
+        : null;
+
     let profileContent;
 
     if (profile === null || loading) {
@@ -38,7 +46,7 @@ class Profile extends Component {
           <ProfileHeader profile={profile} />
           <ProfileAbout profile={profile} />
           <ProfileCreds education={profile.education} experience={profile.experience} />
-          <ProfileGithub />
+          {githubUsername ? <ProfileGithub username={githubUsername} /> : null}
         </div>
       );
     }
