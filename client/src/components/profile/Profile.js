@@ -29,7 +29,7 @@ class Profile extends Component {
   render() {
     const { profile, loading } = this.props.profile;
     const githubUsername =
-      profile && profile.social.github
+      profile && profile.social && profile.social.github
         ? profile.social.github
             .trim()
             .split('/')
