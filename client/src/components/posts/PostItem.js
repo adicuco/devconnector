@@ -38,11 +38,21 @@ class PostItem extends Component {
       <div className="card card-body mb-3">
         <div className="row">
           <div className="col-md-2">
-            <a href="profile.html">
-              <img className="rounded-circle d-none d-md-block" src={post.avatar} alt="" />
-            </a>
-            <br />
-            <p className="text-center">{post.name}</p>
+            {post.handle ? (
+              <div className="profile-info">
+                <Link to={`/profile/${post.handle}`} style={{ textDecoration: 'none' }}>
+                  <img className="rounded-circle d-none d-md-block" src={post.avatar} alt="" />
+                  <br />
+                  <p className="text-center">{post.name}</p>
+                </Link>
+              </div>
+            ) : (
+              <div className="profile-info">
+                <img className="rounded-circle d-none d-md-block" src={post.avatar} alt="" />
+                <br />
+                <p className="text-center">{post.name}</p>
+              </div>
+            )}
           </div>
           <div className="col-md-10">
             <p className="lead">{post.text}</p>

@@ -12,6 +12,7 @@ const validateLoginInput = require('../../validation/login');
 
 // Load User model
 const User = require('../../models/User');
+const Profile = require('../../models/Profile');
 
 // @route   GET api/users/test
 // @desc    Tests users route
@@ -88,13 +89,19 @@ router.post('/login', (req, res) => {
       if (isMatch) {
         // User Matched
 
-        const payload = { id: user.id, name: user.name, avatar: user.avatar }; // Create JWT Payload
+        let handle = null;
+        // Check for profile to get handle
+        Profile.findOne({ user: user._id }).then(profile => {
+          if (profile) handle = profile.handle;
 
-        // Sign Token | Token expires in 5h
-        jwt.sign(payload, keys.secretOrKey, { expiresIn: 3600 * 5}, (err, token) => {
-          res.json({
-            success: true,
-            token: 'Bearer ' + token
+          const payload = { id: user.id, name: user.name, avatar: user.avatar, handle: handle }; // Create JWT Payload
+          // Sign Token | Token expires in 5h
+
+          jwt.sign(payload, keys.secretOrKey, { expiresIn: 3600 * 5 }, (err, token) => {
+            res.json({
+              success: true,
+              token: 'Bearer ' + token
+            });
           });
         });
       } else {

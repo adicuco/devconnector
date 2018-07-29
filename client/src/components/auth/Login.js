@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+
 import { loginUser } from '../../actions/authActions';
 
 import TextFieldGroup from '../common/TextFieldGroup';
@@ -30,13 +31,13 @@ class Login extends Component {
     this.props.loginUser(userData);
   };
 
-  componentDidMount() {
+  componentDidMount = () => {
     if (this.props.auth.isAuthenticated) {
       this.props.history.push('/dashboard');
     }
-  }
+  };
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps = nextProps => {
     if (nextProps.auth.isAuthenticated) {
       this.props.history.push('/dashboard');
     }
@@ -44,7 +45,8 @@ class Login extends Component {
     if (nextProps.errors) {
       this.setState({ errors: nextProps.errors });
     }
-  }
+  };
+  
   render() {
     const { email, password, errors } = this.state;
     const { onChange, onSubmit } = this;
