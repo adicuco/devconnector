@@ -4,7 +4,7 @@ A social network for developers made on MERN Stack based on Udemy course.
 
 **Live demo:** <https://devconnector-mern.herokuapp.com>
  
- ## Main Technologies
+## Main Technologies
 
 ### Client Side
 
@@ -37,7 +37,7 @@ $ npm run client-install
 
 Create **config/keys_dev.js** file
 
-Add your MongoDb URL, JWT secret and Github credentials.
+Add your MongoDb URL, JWT secret and Github credentials
 
 ```bash
 module.exports = {
