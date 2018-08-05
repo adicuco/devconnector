@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
 
-import { deleteComment, likeComment } from '../../actions/postActions';
+import { deleteComment, likeComment } from '../../redux/actions/postActions';
 
 class CommentItem extends Component {
   onDeleteClick = (postId, commentId) => {

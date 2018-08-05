@@ -194,7 +194,7 @@ const addExperience = async (req, res) => {
       from: req.body.from,
       to: req.body.to,
       current: req.body.current,
-      descripton: req.body.descripton
+      description: req.body.description
     };
 
     // Add to experience array
@@ -227,7 +227,7 @@ const addEducation = async (req, res) => {
       from: req.body.from,
       to: req.body.to,
       current: req.body.current,
-      descripton: req.body.descripton
+      description: req.body.description
     };
 
     // Add to experience array

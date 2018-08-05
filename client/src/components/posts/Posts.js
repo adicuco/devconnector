@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { getPosts } from '../../actions/postActions';
+import { getPosts } from '../../redux/actions/postActions';
 
 import PostForm from './PostForm';
 import PostFeed from './PostFeed';

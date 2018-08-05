@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { getPost } from '../../actions/postActions';
+import { getPost } from '../../redux/actions/postActions';
 
 import Spinner from '../common/Spinner';
 import PostItem from '../posts/PostItem';

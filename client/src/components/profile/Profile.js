@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-import { getProfileByHandle } from '../../actions/profileActions';
+import { getProfileByHandle } from '../../redux/actions/profileActions';
 
 import ProfileHeader from './ProfileHeader';
 import ProfileAbout from './ProfileAbout';

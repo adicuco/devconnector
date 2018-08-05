@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Spinner from '../common/Spinner';
 
-import { getProfiles } from '../../actions/profileActions';
+import { getProfiles } from '../../redux/actions/profileActions';
 
 import ProfileItem from './ProfileItem';
 

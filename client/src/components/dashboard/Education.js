@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Moment from 'react-moment';
-import { deleteEducation } from '../../actions/profileActions';
+import { deleteEducation } from '../../redux/actions/profileActions';
 
 class Education extends Component {
   onDeleteClick = id => {

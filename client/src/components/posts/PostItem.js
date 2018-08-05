@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import classnames from 'classnames';
 import { Link } from 'react-router-dom';
 
-import { deletePost, likePost } from '../../actions/postActions';
+import { deletePost, likePost } from '../../redux/actions/postActions';
 
 class PostItem extends Component {
   onDeleteClick = id => {

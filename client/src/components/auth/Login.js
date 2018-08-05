@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { loginUser } from '../../actions/authActions';
+import { loginUser } from '../../redux/actions/authActions';
 
 import TextFieldGroup from '../common/TextFieldGroup';
 
