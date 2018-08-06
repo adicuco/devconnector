@@ -42,6 +42,7 @@ const createPost = async (req, res) => {
     postFields.avatar = req.body.avatar;
     postFields.name = req.body.name;
     postFields.text = req.body.text;
+    postFields.handle = req.body.handle;
 
     // Create new profile
     const newPost = await new Post(postFields).save();
@@ -113,7 +114,8 @@ const addComment = async (req, res) => {
       text: req.body.text,
       name: req.body.name,
       avatar: req.body.avatar,
-      user: req.user.id
+      user: req.user.id,
+      handle: req.body.handle
     };
 
     // Add comment to comments array
